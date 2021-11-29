@@ -9,7 +9,8 @@
   },
   "scripts": {
     "test": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "author": "DjDeveloperr",
   "license": "MIT",
