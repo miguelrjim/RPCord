@@ -115,9 +115,9 @@ export class RPClient extends EventEmitter {
 
   private processPacket(packet: Packet) {
     if (packet.op == OpCode.Close) {
-      throw new Error(
+      this.emit("error", new Error(
         `Discord IPC Closed (${packet.data.code}): ${packet.data.message}`
-      );
+      ));
     }
 
     switch (packet.op) {
