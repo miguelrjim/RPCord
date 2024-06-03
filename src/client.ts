@@ -184,12 +184,6 @@ export class RPClient extends EventEmitter {
       case RPCEvent.Ready:
         this.user = data.user;
         this.config = data.config;
-        for (const e of Object.values(RPCEvent)) {
-          if (IGNORED_AUTO_EVENTS.includes(e)) continue;
-          try {
-            await this.subscribe(e);
-          } catch (e) {}
-        }
         this.emit("ready");
         break;
 
@@ -210,6 +204,15 @@ export class RPClient extends EventEmitter {
 
         this.emit(event, data);
         break;
+    }
+  }
+
+  async subscribeEvents() {
+    for (const e of Object.values(RPCEvent)) {
+      if (IGNORED_AUTO_EVENTS.includes(e)) continue;
+      try {
+        await this.subscribe(e);
+      } catch (e) {}
     }
   }
 
